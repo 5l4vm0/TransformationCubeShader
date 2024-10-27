@@ -16,7 +16,6 @@ public class TransformationGrid : MonoBehaviour
     float time;
     ScaleTransformation _scaleTransRef;
     RotationTransformation _rotationTransRef;
-    Quaternion _startingRotation;
     public Quaternion RotationDelta;
     [SerializeField] MouseInput _mouseInputRef;
     List<Transform> _cubeTransform = new List<Transform>();
@@ -40,7 +39,6 @@ public class TransformationGrid : MonoBehaviour
         }
         transformations = new List<Transformation>();
         _rotationTransRef.rotation = Quaternion.Euler(300, 0, 315);
-        _startingRotation = _rotationTransRef.rotation;
     }
 
 
@@ -85,10 +83,6 @@ public class TransformationGrid : MonoBehaviour
     {
          Transform cube = Instantiate(prefab);
         cube.localPosition = GetCoordinates(x, y, z);
-        //cube.GetComponent<MeshRenderer>().material.color = new Color(
-        //    (float)x / gridResolution, 
-        //    (float)y / gridResolution, 
-        //    (float)z / gridResolution);
         _cubeTransform.Add(cube);
         return cube;
     }
@@ -107,13 +101,6 @@ public class TransformationGrid : MonoBehaviour
 
     private Vector3 TransformPoint(int x, int y, int z)
     {
-        //Vector3 coordinates = GetCoordinates(x, y, z);
-        //for(int i =0; i < transformations.Count; i++)
-        //{
-        //    coordinates = transformations[i].Apply(coordinates);
-        //}
-        //return coordinates;
-
         Vector3 coordinates = GetCoordinates(x, y, z);
         return transformation.MultiplyPoint(coordinates);
     }
