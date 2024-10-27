@@ -95,7 +95,7 @@ public class TransformationGrid : MonoBehaviour
     private Color UpdateCubeColour(int x, int y, int z)
     {
         Color color = new Color(
-            (float)((float) x / gridResolution + ((Mathf.Sin(time) * 0.5f + 0.5f)))%1,
+            Mathf.PingPong(time + ((float)x / gridResolution), 1.0f),
             (float)y / gridResolution ,
             (float)z / gridResolution);
         return color;
