@@ -17,6 +17,7 @@ public class TransformationGrid : MonoBehaviour
     ScaleTransformation _scaleTransRef;
     RotationTransformation _rotationTransRef;
     Quaternion _startingRotation;
+    public Quaternion RotationDelta;
     [SerializeField] MouseInput _mouseInputRef;
 
     void Awake()
@@ -41,9 +42,10 @@ public class TransformationGrid : MonoBehaviour
         _startingRotation = _rotationTransRef.rotation;
     }
 
+
     private void Update()
     {
-        time += Time.deltaTime;
+        
         UpdateTransformation();
         for (int i = 0, z = 0; z < gridResolution; z++)
         {
@@ -59,11 +61,12 @@ public class TransformationGrid : MonoBehaviour
 
         if(_mouseInputRef.IsMouseControl == false)
         {
+            time += Time.deltaTime;
             _scaleTransRef.scale = new Vector3(1 + Mathf.Sin(time) * 0.5f + 0.5f, 1 + Mathf.Sin(time) * 0.5f + 0.5f, 1 + Mathf.Sin(time) * 0.5f + 0.5f);
             _rotationTransRef.rotation =  Quaternion.Euler(
-                _startingRotation.eulerAngles.x,
-                _startingRotation.eulerAngles.y + time*50, 
-                _startingRotation.eulerAngles.z);
+                _rotationTransRef.rotation.eulerAngles.x,
+                _rotationTransRef.rotation.eulerAngles.y +20*Time.deltaTime,
+                _rotationTransRef.rotation.eulerAngles.z);
         }
     }
 

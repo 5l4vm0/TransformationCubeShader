@@ -11,15 +11,21 @@ public class MouseInput : MonoBehaviour
     [SerializeField] private TransformationGrid _TransRef;
     [SerializeField] private float rotationSpeed = 0.2f;
     [SerializeField] private float scaleSpeed = 0.2f;
+    [SerializeField] private Quaternion originalRotation;
     public bool IsMouseControl = false;
 
+    private void Start()
+    {
+        originalRotation = _rotationTransRef.rotation;
+    }
     void Update()
     {
         //mouse input
         if (Input.GetMouseButtonDown(0))
         {
             IsMouseControl = true;
-            _mouseTouchStart = Input.mousePosition; 
+            _mouseTouchStart = Input.mousePosition;
+            
         }
         if (Input.GetMouseButton(0))
         {
@@ -37,6 +43,7 @@ public class MouseInput : MonoBehaviour
         }
         if(Input.GetMouseButtonUp(0))
         {
+            
             IsMouseControl = false;
         }
 
