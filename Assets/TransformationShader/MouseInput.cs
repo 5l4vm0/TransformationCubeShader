@@ -11,12 +11,14 @@ public class MouseInput : MonoBehaviour
     [SerializeField] private TransformationGrid _TransRef;
     [SerializeField] private float rotationSpeed = 0.2f;
     [SerializeField] private float scaleSpeed = 0.2f;
+    public bool IsMouseControl = false;
 
     void Update()
     {
         //mouse input
         if (Input.GetMouseButtonDown(0))
         {
+            IsMouseControl = true;
             _mouseTouchStart = Input.mousePosition; 
         }
         if (Input.GetMouseButton(0))
@@ -32,6 +34,10 @@ public class MouseInput : MonoBehaviour
 
             // Convert the world-space rotation to local rotation relative to the object's current rotation
             _rotationTransRef.rotation = rotationDelta * _rotationTransRef.rotation; // Apply new rotation (world rotation) first, then apply object's existing rotation
+        }
+        if(Input.GetMouseButtonUp(0))
+        {
+            IsMouseControl = false;
         }
 
         //Touch Input

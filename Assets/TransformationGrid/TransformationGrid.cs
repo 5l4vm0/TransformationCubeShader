@@ -14,10 +14,15 @@ public class TransformationGrid : MonoBehaviour
     List<Transformation> transformations;
     Matrix4x4 transformation;
     float time;
+    ScaleTransformation _scaleTransRef;
+    RotationTransformation _rotationTransRef;
+    Quaternion _startingRotation;
+    [SerializeField] MouseInput _mouseInputRef;
 
     void Awake()
     {
-        
+        _scaleTransRef = GetComponent<ScaleTransformation>();
+        _rotationTransRef = GetComponent<RotationTransformation>();
 
         grid = new Transform[gridResolution * gridResolution * gridResolution];
         
@@ -32,6 +37,8 @@ public class TransformationGrid : MonoBehaviour
             }
         }
         transformations = new List<Transformation>();
+        _rotationTransRef.rotation = Quaternion.Euler(300, 0, 315);
+        _startingRotation = _rotationTransRef.rotation;
     }
 
     private void Update()
@@ -48,6 +55,15 @@ public class TransformationGrid : MonoBehaviour
                     grid[i].gameObject.GetComponent<MeshRenderer>().material.color = UpdateCubeColour(x, y, z);
                 }
             }
+        }
+
+        if(_mouseInputRef.IsMouseControl == false)
+        {
+            _scaleTransRef.scale = new Vector3(1 + Mathf.Sin(time) * 0.5f + 0.5f, 1 + Mathf.Sin(time) * 0.5f + 0.5f, 1 + Mathf.Sin(time) * 0.5f + 0.5f);
+            _rotationTransRef.rotation =  Quaternion.Euler(
+                _startingRotation.eulerAngles.x,
+                _startingRotation.eulerAngles.y + time*50, 
+                _startingRotation.eulerAngles.z);
         }
     }
 

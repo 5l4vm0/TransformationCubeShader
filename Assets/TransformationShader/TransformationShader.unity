@@ -207,7 +207,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 0.5
@@ -447,6 +447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 6748151418697488417, guid: 42ac81b3b5572f8488be52d7925346c2, type: 3}
   gridResolution: 10
+  _mouseInputRef: {fileID: 963194229}
 --- !u!23 &829559840
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -640,6 +641,7 @@ MonoBehaviour:
   _TransRef: {fileID: 829559839}
   rotationSpeed: 0.2
   scaleSpeed: 0.2
+  IsMouseControl: 0
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
