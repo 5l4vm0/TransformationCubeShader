@@ -1,14 +1,15 @@
-# Transformation Cube Shader (Unity HDRP)
+# Transformation Cube Shader 
 ## Overview
-Transformation Cube Shader is a Unity HDRP project that applies transformation effects—scaling, rotation, and colour manipulation—to a 3D grid of cubes in real-time. It showcases dynamic transformations controlled programmatically and through user input, creating a visually striking effect that leverages HDRP's high-quality rendering features.
+Transformation Cube Shader is a Unity project that applies transformation effects—scaling, rotation, and colour manipulation—to a 3D grid of cubes in real-time. It showcases dynamic transformations controlled programmatically and through user input, creating a visually striking effect that leverages HDRP's high-quality rendering features.
 
 https://github.com/user-attachments/assets/70fd8f95-6055-423b-a99c-014519bdbe06
 
 [Video Link](https://youtu.be/PaRDc6INBPk)
 
 ## Features
-### High Definition Render Pipeline (HDRP) Compatibility
-* Designed specifically for Unity's HDRP, enabling advanced lighting, shadows, and post-processing effects for high-fidelity visuals.
+### High Definition Render Pipeline (HDRP), URP and build in Compatibility
+* Designed for Unity's HDRP, enabling advanced lighting, shadows, and post-processing effects for high-fidelity visuals.
+* Also compatible with URP and build in pipeline -> Can run on touch-enabled devices
 
 ### Dynamic Grid Setup
 * Generates a grid of cubes at runtime based on the specified gridResolution parameter.
@@ -40,10 +41,11 @@ https://github.com/user-attachments/assets/70fd8f95-6055-423b-a99c-014519bdbe06
   
 ## Installation and Usage
 * Clone the Repository: Download or clone this repository to your local machine.
-* Open in Unity HDRP: Open the project in Unity Editor with HDRP enabled (Unity version compatible with HDRP).
+* Open in Unity HDRP for better visual effect: Open the project in Unity Editor with HDRP enabled (Unity version compatible with HDRP).
+    * Or open in URP/build in pipeline for touch-enable devices control
 * Configure parameters such as gridResolution, rotationSpeed, scaleSpeed and assign prefab in the TransformationGrid component to spawn your desired gameobject 
 * Run: Play the scene in Unity to see the grid transformation in action.
-    * Control the cube rotation using mouse input in the game view at run time
+    * Control the cube rotation using mouse input/Input touch in the game view at run time
 
 ## Dependencies
 * Unity Engine with HDRP enabled (Unity version compatible with HDRP)
