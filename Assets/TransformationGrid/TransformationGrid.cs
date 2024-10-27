@@ -19,6 +19,7 @@ public class TransformationGrid : MonoBehaviour
     Quaternion _startingRotation;
     public Quaternion RotationDelta;
     [SerializeField] MouseInput _mouseInputRef;
+    List<Transform> _cubeTransform = new List<Transform>();
 
     void Awake()
     {
@@ -62,7 +63,17 @@ public class TransformationGrid : MonoBehaviour
         if(_mouseInputRef.IsMouseControl == false)
         {
             time += Time.deltaTime;
+
+            //Cube scale
             _scaleTransRef.scale = new Vector3(1 + Mathf.Sin(time) * 0.5f + 0.5f, 1 + Mathf.Sin(time) * 0.5f + 0.5f, 1 + Mathf.Sin(time) * 0.5f + 0.5f);
+            
+            //Each cube local scale
+            foreach(Transform cube in _cubeTransform)
+            {
+                cube.localScale = new Vector3(0.5f + (Mathf.Sin(time) * 0.5f + 0.5f)*0.3f, 0.5f + (Mathf.Sin(time) * 0.5f + 0.5f)*0.3f, 0.5f + (Mathf.Sin(time) * 0.5f + 0.5f)*0.3f);
+            }
+
+            //Cube rotation
             _rotationTransRef.rotation =  Quaternion.Euler(
                 _rotationTransRef.rotation.eulerAngles.x,
                 _rotationTransRef.rotation.eulerAngles.y +20*Time.deltaTime,
@@ -72,13 +83,13 @@ public class TransformationGrid : MonoBehaviour
 
     private Transform CreateGridPoint(int x,int y,int z)
     {
-        Transform cube = Instantiate(prefab);
+         Transform cube = Instantiate(prefab);
         cube.localPosition = GetCoordinates(x, y, z);
         //cube.GetComponent<MeshRenderer>().material.color = new Color(
         //    (float)x / gridResolution, 
         //    (float)y / gridResolution, 
         //    (float)z / gridResolution);
-        
+        _cubeTransform.Add(cube);
         return cube;
     }
     private Color UpdateCubeColour(int x, int y, int z)
