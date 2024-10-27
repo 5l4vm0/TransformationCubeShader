@@ -641,7 +641,7 @@ MonoBehaviour:
   _scaleTransRef: {fileID: 829559842}
   _TransRef: {fileID: 829559839}
   rotationSpeed: 0.2
-  scaleSpeed: 0.2
+  scaleSpeed: 0.005
   originalRotation: {x: 0, y: 0, z: 0, w: 0}
   IsMouseControl: 0
 --- !u!114 &963194230

@@ -63,7 +63,7 @@ public class TransformationGrid : MonoBehaviour
             time += Time.deltaTime;
 
             //Cube scale
-            _scaleTransRef.scale = new Vector3(1 + Mathf.Sin(time) * 0.5f + 0.5f, 1 + Mathf.Sin(time) * 0.5f + 0.5f, 1 + Mathf.Sin(time) * 0.5f + 0.5f);
+            _scaleTransRef.scale = new Vector3(1,1,1)+ _mouseInputRef._scaleDifference + new Vector3( Mathf.Sin(time) * 0.5f + 0.5f,Mathf.Sin(time) * 0.5f + 0.5f, Mathf.Sin(time) * 0.5f + 0.5f);
             
             //Each cube local scale
             foreach(Transform cube in _cubeTransform)

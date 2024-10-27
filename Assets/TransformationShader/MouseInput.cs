@@ -11,13 +11,16 @@ public class MouseInput : MonoBehaviour
     [SerializeField] private TransformationGrid _TransRef;
     [SerializeField] private float rotationSpeed = 0.2f;
     [SerializeField] private float scaleSpeed = 0.2f;
-    [SerializeField] private Quaternion originalRotation;
+    public Vector3 _scaleDifference = new Vector3(0,0,0);
+    private Vector3 _originalScale;
     public bool IsMouseControl = false;
+    private bool _isInputScaling = false;
 
     private void Start()
     {
-        originalRotation = _rotationTransRef.rotation;
+        _originalScale = _scaleTransRef.scale;
     }
+
     void Update()
     {
         //mouse input
@@ -43,13 +46,14 @@ public class MouseInput : MonoBehaviour
         }
         if(Input.GetMouseButtonUp(0))
         {
-            
             IsMouseControl = false;
         }
 
         //Touch Input
         if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
+            IsMouseControl = true;
+            _isInputScaling = false;
             _inputTouchStart = Input.GetTouch(0).position;
         }
         if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Moved)
@@ -68,8 +72,9 @@ public class MouseInput : MonoBehaviour
             // Convert the world-space rotation to local rotation relative to the object's current rotation
             _rotationTransRef.rotation = rotationDelta * _rotationTransRef.rotation; // Apply new rotation (world rotation) first, then apply object's existing rotation
         }
-        if(Input.touchCount == 2)
+        if (Input.touchCount == 2)
         {
+            _isInputScaling = true;
             Touch touchZero = Input.GetTouch(0);
             Touch touchOne = Input.GetTouch(1);
 
@@ -79,10 +84,15 @@ public class MouseInput : MonoBehaviour
             float preMagnitude = (touchOnePrePos - touchZeroPrePos).magnitude;
             float currentMagnitude = (touchOne.position - touchZero.position).magnitude;
 
-            float difference = (currentMagnitude - preMagnitude)* scaleSpeed;
+            float difference = (currentMagnitude - preMagnitude) * scaleSpeed;
             _scaleTransRef.scale = _scaleTransRef.scale + new Vector3(difference, difference, difference);
-
-
+        }
+        if(Input.touchCount >=1 && _isInputScaling && Input.GetTouch(0).phase == TouchPhase.Ended)
+        {
+            _scaleDifference = _scaleTransRef.scale - _originalScale;
+            _originalScale = _scaleTransRef.scale;
+            IsMouseControl = false;
+            _isInputScaling = false;
         }
     }
 }
